@@ -11,17 +11,27 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ifl_example/main.dart';
 
 void main() {
-  testWidgets('Verify Platform version', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('KvStorage flow works in example app',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    // Verify that platform version is retrieved.
-    expect(
-      find.byWidgetPredicate(
-        (Widget widget) => widget is Text &&
-                           widget.data!.startsWith('Running on:'),
-      ),
-      findsOneWidget,
-    );
+    await tester.enterText(find.byKey(const Key('keyField')), 'token');
+    await tester.enterText(find.byKey(const Key('valueField')), 'abc');
+    await tester.tap(find.byKey(const Key('writeBtn')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Result: Saved'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('readBtn')));
+    await tester.pumpAndSettle();
+    expect(find.text('Result: abc'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('deleteBtn')));
+    await tester.pumpAndSettle();
+    expect(find.text('Result: Deleted'), findsOneWidget);
+
+    await tester.tap(find.byKey(const Key('readBtn')));
+    await tester.pumpAndSettle();
+    expect(find.text('Result: Not found'), findsOneWidget);
   });
 }

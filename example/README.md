@@ -4,13 +4,16 @@ Demonstrates how to use the ifl plugin.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This example demonstrates contract-first usage of `KvStorage`.
 
-A few resources to get you started if this is your first Flutter project:
+## What this demo covers
+- Implementing `KvStorage` in app side with an in-memory class.
+- Basic operations: `write`, `read`, `delete`, `clear`.
+- Keeping business code dependent on interface (`KvStorage`) instead of concrete storage engine.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Notes
+- The demo intentionally avoids binding to a specific storage engine.
+- Production apps can replace the in-memory implementation with Hive or
+  flutter_secure_storage adapters while keeping UI/business flow unchanged.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For Flutter basics, see [Flutter documentation](https://docs.flutter.dev/).

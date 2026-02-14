@@ -1,8 +1,5 @@
+library ifl;
 
-import 'ifl_platform_interface.dart';
-
-class Ifl {
-  Future<String?> getPlatformVersion() {
-    return IflPlatform.instance.getPlatformVersion();
-  }
-}
+export 'src/storage/database_storage.dart';
+export 'src/storage/kv_storage.dart';
+export 'src/storage/storage.dart';

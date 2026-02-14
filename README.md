@@ -1,15 +1,41 @@
 # ifl
 
-A new Flutter project.
+Contract-first storage foundation for Flutter apps.
 
-## Getting Started
+## Public API
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/to/develop-plugins),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+- `package:ifl/ifl.dart`
+  - Contracts only (`Storage`, `KvStorage`, `DatabaseStorage`)
+- `package:ifl/ifl_hive.dart`
+  - Stable Hive entrypoint (`createHiveKvStorage`)
+- `package:ifl/ifl_secure.dart`
+  - Stable secure storage entrypoint (`createSecureKvStorage`)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Example: use Hive + Secure KV together
 
+```dart
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ifl/ifl.dart';
+import 'package:ifl/ifl_hive.dart';
+import 'package:ifl/ifl_secure.dart';
+
+Future<void> setupStorage() async {
+  await Hive.initFlutter();
+
+  final hiveBox = await Hive.openBox<String>('app_cache');
+  final KvStorage hiveKv = createHiveKvStorage(hiveBox);
+  final KvStorage secureKv = createSecureKvStorage(
+    name: 'secure_user',
+    storage: const FlutterSecureStorage(),
+  );
+
+  await secureKv.write('token', 'xxx');
+  await hiveKv.write('profile', '{"name":"if"}');
+}
+```
+
+## Notes
+
+- Avoid importing `package:ifl/src/...` directly in app code.
+- Keep business code dependent on `KvStorage` contract, not concrete engines.

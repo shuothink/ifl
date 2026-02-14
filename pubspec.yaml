@@ -1,8 +1,14 @@
 name: ifl
-description: "A new Flutter plugin."
+description: Contract-first storage package for Flutter apps with Hive and secure key-value adapters.
 version: 0.0.1
 homepage: https://github.com/shuothink/ifl
 repository: https://github.com/shuothink/ifl
+issue_tracker: https://github.com/shuothink/ifl/issues
+topics:
+  - storage
+  - flutter
+  - hive
+  - secure-storage
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -11,28 +17,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_web_plugins:
-    sdk: flutter
-  web: ^0.5.1
-  plugin_platform_interface: ^2.0.2
+  hive: ^2.2.3
+  flutter_secure_storage: ^9.2.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-
-flutter:
-  plugin:
-    platforms:
-      android:
-        package: com.example.ifl
-        pluginClass: IflPlugin
-      ios:
-        pluginClass: IflPlugin
-      macos:
-        pluginClass: IflPlugin
-      windows:
-        pluginClass: IflPluginCApi
-      web:
-        pluginClass: IflWeb
-        fileName: ifl_web.dart
