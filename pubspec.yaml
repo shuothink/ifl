@@ -1,6 +1,6 @@
 name: ifl
 description: Contract-first storage package for Flutter apps with Hive and secure key-value adapters.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/shuothink/ifl
 repository: https://github.com/shuothink/ifl
 issue_tracker: https://github.com/shuothink/ifl/issues
