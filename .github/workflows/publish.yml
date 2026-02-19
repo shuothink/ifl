@@ -1,0 +1,18 @@
+# .github/workflows/publish.yml
+name: Publish to pub.dev
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'   # 对应 pub.dev 的 tag pattern: v{{version}}
+
+jobs:
+  publish:
+    permissions:
+      id-token: write  # OIDC 必需
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    # monorepo 才需要：
+    # with:
+    #   working-directory: path/to/package
+    with:
+      environment: pub.dev
